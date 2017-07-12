@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.dao.EmpDao">
+	<!-- 优化代码映射管理，一次设置，下面可优化重复使用 -->
+	<resultMap id="empResultMap" type="com.entity.Emp">
+		<id property="empno" column="empno" />
+		<result property="empName" column="ename" />
+		<result property="hireDate" column="hiredate" />
+		<result property="job" column="job" />
+		<result property="salary" column="sal" />
+		<!-- 别名储存数据，数据库取出的数据为column栏目命名，根据部分在实体类中的命名进行对应 -->
+		<result property="comm" column="comm" />
+		<result property="mgr" column="mgr" />
+		<result property="deptNo" column="deptno" />
+	</resultMap>
+
+	<!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为selectAll，id属性值必须是唯一的，不能够重复；使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型， 
+		resultType="empResultMap"就表示将查询结果封装成一个emp类的对象返回emp类就是emp表所对应的实体类 -->
+	<select id="selectAll" resultType="Emp" resultMap="empResultMap">
+		SELECT * FROM
+		EMP
+	</select>
+
+</mapper>
